@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 # TMDB API Configuration
-TMDB_API_KEY = os.getenv("TMDB_API_KEY", "")
+TMDB_API_KEY = st.secrets.get("TMDB_API_KEY", os.getenv("TMDB_API_KEY", ""))
 TMDB_BASE_URL = "https://api.themoviedb.org/3"
 POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500"
 
@@ -65,7 +65,7 @@ st.markdown("""
 st.title("🎬 Movie Recommendation System")
 
 if not TMDB_API_KEY:
-    st.info("Set the TMDB_API_KEY environment variable to load movie posters.")
+    st.info("Add TMDB_API_KEY to Streamlit secrets or your environment to load movie posters.")
 
 with open('movies.pkl', 'rb') as f:
     movies = pickle.load(f)
